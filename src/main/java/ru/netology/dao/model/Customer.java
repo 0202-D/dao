@@ -4,16 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Table(name = "customers", schema = "netology")
 @Data
 @RequiredArgsConstructor
 public class Customer {
-    @OneToMany(mappedBy = "")
 
-    private List<Order>orderList;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -31,6 +27,4 @@ public class Customer {
     @Column(name="phone_number")
     private String phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customers")
-    private List<Order> orders;
 }

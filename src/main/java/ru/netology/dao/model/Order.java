@@ -20,14 +20,14 @@ public class Order {
     @Column(name="date")
     private Instant date;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customers;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn (name="customer_id")
+    private Customer customerId;
 
-    @JoinColumn(name = "product_name")
+    @Column(name = "product_name")
     private String productName;
 
-    @JoinColumn(name = "amount")
+    @Column(name = "amount")
     private int amount;
 
 
