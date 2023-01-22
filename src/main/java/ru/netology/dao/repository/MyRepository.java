@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 @Repository
 public class MyRepository {
     final static String scriptName = "join.sql";
-
+    private  String products;
     private NamedParameterJdbcTemplate template;
 
     @Autowired
     public MyRepository(NamedParameterJdbcTemplate template) {
         this.template = template;
+        products = read(scriptName);
     }
 
     public static String read(String scriptName) {
@@ -34,7 +35,6 @@ public class MyRepository {
     }
 
     public List<String> getProductName(String name) {
-        String product_name = read(scriptName);
-        return template.queryForList(product_name, new MapSqlParameterSource("name", name), String.class);
+        return template.queryForList(products, new MapSqlParameterSource("name", name), String.class);
     }
 }
