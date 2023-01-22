@@ -1,40 +1,19 @@
 package ru.netology.dao.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class MyRepository {
-    final static String scriptName = "join.sql";
-    private  String products;
-    private NamedParameterJdbcTemplate template;
-
-    @Autowired
-    public MyRepository(NamedParameterJdbcTemplate template) {
-        this.template = template;
-        products = read(scriptName);
-    }
-
-    public static String read(String scriptName) {
-        try (InputStream is = new ClassPathResource(scriptName).getInputStream();
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
-            return bufferedReader.lines().collect(Collectors.joining("\n"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public List<String> getProductName(String name) {
-        return template.queryForList(products, new MapSqlParameterSource("name", name), String.class);
+        return entityManager.createQuery("SELECT O.productName FROM Order O JOIN Customer C ON C.Id= O.customerId where C.name= :name")
+                .setParameter("name", name).getResultList();
+
     }
 }

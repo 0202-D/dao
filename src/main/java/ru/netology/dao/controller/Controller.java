@@ -10,7 +10,6 @@ import java.util.List;
 public class Controller {
     private final MyRepository repository;
 
-
     public Controller(MyRepository repository){
         this.repository = repository;
     }
