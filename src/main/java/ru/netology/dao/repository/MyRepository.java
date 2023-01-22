@@ -1,5 +1,7 @@
 package ru.netology.dao.repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Repository
 public class MyRepository {
+    @PersistenceContext
+    private EntityManager entityManager;
     final static String scriptName = "join.sql";
     private  String products;
     private NamedParameterJdbcTemplate template;
