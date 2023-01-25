@@ -39,7 +39,7 @@ public class PersonService {
     }
 
     public List<Person> findPersonByCity(String city) {
-        return repository.findByCityOfLiving(city);
+        return repository.findByCity(city);
     }
 
     public void delete(int id) {
@@ -48,7 +48,7 @@ public class PersonService {
     }
 
     public List<Person> findByAgeIsLessThanOrderByAsc(int age) {
-        return repository.findByAgeIsLessThanOrderByAgeAsc(age);
+        return repository.findByAgeIsLess(age);
     }
 
     public List <Optional<Person> >findByNameAndSurName(String name, String surname) {
