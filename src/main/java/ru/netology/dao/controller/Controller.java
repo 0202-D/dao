@@ -17,6 +17,11 @@ public class Controller {
         this.service = service;
     }
 
+    @GetMapping("/")
+    public String hello() {
+        return "Hello";
+    }
+
     @GetMapping("/persons")
     public List<Person> getAllPerson() {
         return service.findAll();

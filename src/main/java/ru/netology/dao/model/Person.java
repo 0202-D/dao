@@ -1,7 +1,8 @@
 package ru.netology.dao.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="persons",schema = "netology")
